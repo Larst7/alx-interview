@@ -1,19 +1,20 @@
 #!/usr/bin/python3
-from typing import List
+""" function unlocks boxes """
 
-def canUnlockAll(boxes: List[List[int]]) -> bool:
-    n = len(boxes)
-    opened = [False] * n
-    opened[0] = True  # The first box is initially opened
-    keys = boxes[0]  # Start with the keys in the first box
 
-    while keys:
-        new_keys = []
+def canUnlockAll(boxes):
+    """  """
+    num_boxes = len(boxes)
+    unlocked = [False] * num_boxes
+    unlocked[0] = True
+
+    for box_num in range(num_boxes):
+        if not unlocked[box_num]:
+            continue
+
+        keys = boxes[box_num]
         for key in keys:
-            if 0 <= key < n and not opened[key]:
-                opened[key] = True
-                new_keys.extend(boxes[key])
-        keys = new_keys
+            if key < num_boxes and not unlocked[key]:
+                unlocked[key] = True
 
-    return all(opened)
-
+    return all(unlocked)
